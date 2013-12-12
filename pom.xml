@@ -5,7 +5,7 @@
     <groupId>com.hypnoticocelot</groupId>
     <artifactId>jaxrs-doclet-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3-ucsbrace</version>
     <name>JAX-RS Doclet</name>
     <url>https://github.com/ryankennedy/swagger-jaxrs-doclet</url>
     <description>
@@ -14,7 +14,7 @@
 
     <modules>
         <module>jaxrs-doclet</module>
-        <module>jaxrs-doclet-sample-dropwizard</module>
+        <!--module>jaxrs-doclet-sample-dropwizard</module-->
     </modules>
 
     <developers>
