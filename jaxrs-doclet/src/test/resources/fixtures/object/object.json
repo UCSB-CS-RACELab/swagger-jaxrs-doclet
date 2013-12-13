@@ -9,9 +9,9 @@
             "description": "",
             "operations": [
                 {
-                    "httpMethod": "GET",
+                    "method": "GET",
                     "nickname": "get",
-                    "responseClass": "object"
+                    "type": "object"
                 }
             ]
         }

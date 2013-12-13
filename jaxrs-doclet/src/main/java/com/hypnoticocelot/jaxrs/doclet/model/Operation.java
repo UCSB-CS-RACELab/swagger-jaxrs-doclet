@@ -10,9 +10,9 @@ import static com.google.common.base.Strings.emptyToNull;
 
 public class Operation {
 
-    private HttpMethod httpMethod;
+    private HttpMethod method;
     private String nickname;
-    private String responseClass; // void, primitive, complex or a container
+    private String type; // void, primitive, complex or a container
     private List<ApiParameter> parameters;
     private String summary; // cap at 60 characters for readability in the UI
     private String notes;
@@ -27,9 +27,9 @@ public class Operation {
     }
 
     public Operation(Method method) {
-        this.httpMethod = method.getMethod();
+        this.method = method.getMethod();
         this.nickname = emptyToNull(method.getMethodName());
-        this.responseClass = emptyToNull(AnnotationHelper.typeOf(method.getReturnType()));
+        this.type = emptyToNull(AnnotationHelper.typeOf(method.getReturnType()));
         this.parameters = method.getParameters().isEmpty() ? null : method.getParameters();
         this.responseMessages = method.getResponseMessages().isEmpty() ? null : method.getResponseMessages();
         this.summary = emptyToNull(method.getFirstSentence());
@@ -38,16 +38,16 @@ public class Operation {
         this.consumes = method.getConsumes();
     }
 
-    public HttpMethod getHttpMethod() {
-        return httpMethod;
+    public HttpMethod getMethod() {
+        return method;
     }
 
     public String getNickname() {
         return nickname;
     }
 
-    public String getResponseClass() {
-        return responseClass;
+    public String getType() {
+        return type;
     }
 
     public List<ApiParameter> getParameters() {
@@ -79,9 +79,9 @@ public class Operation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Operation that = (Operation) o;
-        return Objects.equal(httpMethod, that.httpMethod)
+        return Objects.equal(method, that.method)
                 && Objects.equal(nickname, that.nickname)
-                && Objects.equal(responseClass, that.responseClass)
+                && Objects.equal(type, that.type)
                 && Objects.equal(parameters, that.parameters)
                 && Objects.equal(responseMessages, that.responseMessages)
                 && Objects.equal(summary, that.summary)
@@ -90,15 +90,15 @@ public class Operation {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(httpMethod, nickname, responseClass, parameters, responseMessages, summary, notes);
+        return Objects.hashCode(method, nickname, type, parameters, responseMessages, summary, notes);
     }
 
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
-                .add("httpMethod", httpMethod)
+                .add("httpMethod", method)
                 .add("nickname", nickname)
-                .add("responseClass", responseClass)
+                .add("responseClass", type)
                 .add("parameters", parameters)
                 .add("responseMessages", responseMessages)
                 .add("summary", summary)

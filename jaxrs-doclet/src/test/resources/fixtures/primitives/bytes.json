@@ -9,14 +9,14 @@
             "description": "",
             "operations": [
                 {
-                    "httpMethod": "GET",
+                    "method": "GET",
                     "nickname": "get",
-                    "responseClass": "byte"
+                    "type": "byte"
                 },
                 {
-                    "httpMethod": "POST",
+                    "method": "POST",
                     "nickname": "create",
-                    "responseClass": "void",
+                    "type": "void",
                     "parameters": [
                         {
                             "paramType": "body",

@@ -9,15 +9,15 @@
             "description": "",
             "operations": [
                 {
-                    "httpMethod": "GET",
+                    "method": "GET",
                     "nickname": "get",
-                    "responseClass": "response",
+                    "type": "response",
                     "produces": [ "application/json" ]
                 },
                 {
-                    "httpMethod": "POST",
+                    "method": "POST",
                     "nickname": "create",
-                    "responseClass": "void",
+                    "type": "void",
                     "parameters": [
                         {
                             "paramType": "body",

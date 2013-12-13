@@ -22,7 +22,7 @@ public class AnnotationHelper {
     static final List<String> PRIMITIVES = new ArrayList<String>() {{
         add("byte");
         add("boolean");
-        add("int");
+        add("integer");
         add("long");
         add("float");
         add("double");
@@ -68,8 +68,8 @@ public class AnnotationHelper {
                 type = javaType;
             }
         }
-        if (type.equalsIgnoreCase("integer")) {
-            type = "int";
+        if (type.equalsIgnoreCase("int")) {
+            type = "integer";
         } else if (type.equalsIgnoreCase("arraylist") || type.equalsIgnoreCase("linkedlist")) {
             type = "List";
         }

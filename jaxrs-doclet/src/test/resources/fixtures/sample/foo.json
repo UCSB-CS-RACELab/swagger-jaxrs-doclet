@@ -9,9 +9,9 @@
             "description": "",
             "operations": [
                 {
-                    "httpMethod": "GET",
+                    "method": "GET",
                     "nickname": "sayHello",
-                    "responseClass": "string",
+                    "type": "string",
                     "parameters": [
                         {
                             "paramType": "query",
@@ -27,9 +27,9 @@
                     ]
                 },
                 {
-                    "httpMethod": "POST",
+                    "method": "POST",
                     "nickname": "createSpeech",
-                    "responseClass": "int",
+                    "type": "integer",
                     "parameters": [
                         {
                             "paramType": "body",
@@ -45,9 +45,9 @@
             "description": "",
             "operations": [
                 {
-                    "httpMethod": "POST",
+                    "method": "POST",
                     "nickname": "createSpeechWithAnnotatedPayload",
-                    "responseClass": "int",
+                    "type": "integer",
                     "parameters": [
                         {
                             "paramType": "body",
@@ -63,9 +63,9 @@
             "description": "",
             "operations": [
                 {
-                    "httpMethod": "POST",
+                    "method": "POST",
                     "nickname": "createSub",
-                    "responseClass": "int",
+                    "type": "integer",
                     "parameters": [
 
                         {
@@ -82,9 +82,9 @@
             "description": "",
             "operations": [
                 {
-                    "httpMethod": "GET",
+                    "method": "GET",
                     "nickname": "sayHello",
-                    "responseClass": "string",
+                    "type": "string",
                     "parameters": [
                         {
                             "paramType": "query",

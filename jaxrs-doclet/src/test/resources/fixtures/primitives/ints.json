@@ -9,19 +9,19 @@
             "description": "",
             "operations": [
                 {
-                    "httpMethod": "GET",
+                    "method": "GET",
                     "nickname": "get",
-                    "responseClass": "int"
+                    "type": "integer"
                 },
                 {
-                    "httpMethod": "POST",
+                    "method": "POST",
                     "nickname": "create",
-                    "responseClass": "void",
+                    "type": "void",
                     "parameters": [
                         {
                             "paramType": "body",
                             "name": "value",
-                            "dataType": "int"
+                            "dataType": "integer"
                         }
                     ]
                 }
