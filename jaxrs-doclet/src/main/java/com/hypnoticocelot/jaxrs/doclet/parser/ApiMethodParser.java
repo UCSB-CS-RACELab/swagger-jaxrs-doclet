@@ -94,10 +94,11 @@ public class ApiMethodParser {
                             if (AnnotationHelper.isPrimitive(typeName)) {
                                 responseModel = typeName;
                             } else {
-                                Type responseType = AnnotationHelper.getClassDoc(message.substring(1, end));
+                                Type responseType = AnnotationHelper.getClassDoc(typeName);
                                 responseModel = translator.typeName(responseType).value();
                                 if (options.isParseModels()) {
-                                    models.addAll(new ApiModelParser(options, translator, responseType).parse());
+                                    models.addAll(new ApiModelParser(
+                                            options, translator, responseType).parse());
                                 }
                             }
                             message = message.substring(end + 1);
