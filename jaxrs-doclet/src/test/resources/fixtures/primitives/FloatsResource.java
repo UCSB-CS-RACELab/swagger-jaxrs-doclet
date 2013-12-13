@@ -12,6 +12,9 @@ public class FloatsResource {
         return 0;
     }
 
+    /**
+     * @output void
+     */
     @POST
     public Response create(float value) {
         return Response.ok().build();

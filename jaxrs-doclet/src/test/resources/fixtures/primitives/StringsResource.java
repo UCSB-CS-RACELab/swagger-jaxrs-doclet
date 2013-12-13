@@ -12,6 +12,9 @@ public class StringsResource {
         return "hello world";
     }
 
+    /**
+     * @output void
+     */
     @POST
     public Response create(String value) {
         return Response.ok().build();

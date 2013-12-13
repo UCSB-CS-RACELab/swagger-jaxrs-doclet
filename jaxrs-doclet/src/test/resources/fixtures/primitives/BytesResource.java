@@ -12,6 +12,9 @@ public class BytesResource {
         return 0;
     }
 
+    /**
+     * @output void
+     */
     @POST
     public Response create(byte value) {
         return Response.ok().build();

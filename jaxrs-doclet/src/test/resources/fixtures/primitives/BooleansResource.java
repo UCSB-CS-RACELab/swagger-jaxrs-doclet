@@ -12,6 +12,9 @@ public class BooleansResource {
         return false;
     }
 
+    /**
+     * @output void
+     */
     @POST
     public Response create(boolean value) {
         return Response.ok().build();

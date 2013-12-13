@@ -9,17 +9,14 @@ import static com.hypnoticocelot.jaxrs.doclet.translator.Translator.OptionalName
 
 public class NameBasedTranslator implements Translator {
 
-    @Override
     public OptionalName typeName(Type type) {
         return presentOrMissing(AnnotationHelper.typeOf(type.qualifiedTypeName()));
     }
 
-    @Override
     public OptionalName fieldName(FieldDoc field) {
         return presentOrMissing(field.name());
     }
 
-    @Override
     public OptionalName methodName(MethodDoc method) {
         String name = null;
         if (method.name().startsWith("get") && method.name().length() > 3) {

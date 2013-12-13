@@ -12,6 +12,9 @@ public class ShortsResource {
         return 0;
     }
 
+    /**
+     * @output void
+     */
     @POST
     public Response create(short value) {
         return Response.ok().build();

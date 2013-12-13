@@ -12,6 +12,9 @@ public class DoublesResource {
         return 0;
     }
 
+    /**
+     * @output void
+     */
     @POST
     public Response create(double value) {
         return Response.ok().build();

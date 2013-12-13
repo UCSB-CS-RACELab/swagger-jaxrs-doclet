@@ -12,6 +12,9 @@ public class JaxbResource {
         return new ResponseModel();
     }
 
+    /**
+     * @output void
+     */
     @POST
     public Response create(PayloadModel payload) {
         return Response.ok().build();

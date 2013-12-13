@@ -90,7 +90,6 @@ public class ApiClassParser {
         for (Map.Entry<String, Collection<Method>> apiEntries : apiMethods.entrySet()) {
             Collection<Operation> operations = new ArrayList<Operation>(
                     transform(apiEntries.getValue(), new Function<Method, Operation>() {
-                        @Override
                         public Operation apply(Method method) {
                             return new Operation(method);
                         }
@@ -99,7 +98,6 @@ public class ApiClassParser {
             apis.add(new Api(apiEntries.getKey(), "", operations));
         }
         Collections.sort(apis, new Comparator<Api>() {
-            @Override
             public int compare(Api o1, Api o2) {
                 return o1.getPath().compareTo(o2.getPath());
             }

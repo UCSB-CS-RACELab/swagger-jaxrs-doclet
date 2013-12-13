@@ -16,7 +16,7 @@
                 {
                     "httpMethod": "POST",
                     "nickname": "create",
-                    "responseClass": "Response",
+                    "responseClass": "void",
                     "parameters": [
                         {
                             "paramType": "body",

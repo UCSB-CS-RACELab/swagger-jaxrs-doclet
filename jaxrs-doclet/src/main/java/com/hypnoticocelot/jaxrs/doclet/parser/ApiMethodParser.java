@@ -1,6 +1,7 @@
 package com.hypnoticocelot.jaxrs.doclet.parser;
 
 import com.hypnoticocelot.jaxrs.doclet.DocletOptions;
+import com.hypnoticocelot.jaxrs.doclet.ServiceDoclet;
 import com.hypnoticocelot.jaxrs.doclet.model.*;
 import com.hypnoticocelot.jaxrs.doclet.translator.Translator;
 import com.sun.javadoc.*;
@@ -18,6 +19,7 @@ public class ApiMethodParser {
     private static final String ANN_PRODUCES = "javax.ws.rs.Produces";
     private static final String ANN_CONSUMES = "javax.ws.rs.Consumes";
     private static final String ANN_FORM_PARAM = "javax.ws.rs.FormParam";
+    private static final String RESPONSE_TYPE = "javax.ws.rs.core.Response";
 
     private final DocletOptions options;
     private final Translator translator;
@@ -90,7 +92,25 @@ public class ApiMethodParser {
 
         // return type
         Type type = methodDoc.returnType();
-        String returnType = translator.typeName(type).value();
+        String returnType;
+        if (RESPONSE_TYPE.equals(type.qualifiedTypeName())) {
+            Tag[] outputTags = methodDoc.tags("output");
+            if (outputTags == null || outputTags.length == 0) {
+                throw new RuntimeException("@output tag should be added to methods that return " +
+                        "JAX-RS Response objects (" + methodDoc.containingClass().qualifiedTypeName() +
+                        "." + methodDoc.name() + ")");
+            }
+
+            String outputType = outputTags[0].text();
+            if (AnnotationHelper.isPrimitive(outputType)) {
+                returnType = outputType;
+            } else {
+                ClassDoc clazzDoc = AnnotationHelper.getClassDoc(outputType);
+                returnType = translator.typeName(clazzDoc).value();
+            }
+        } else {
+            returnType = translator.typeName(type).value();
+        }
         if (options.isParseModels()) {
             models.addAll(new ApiModelParser(options, translator, type).parse());
         }

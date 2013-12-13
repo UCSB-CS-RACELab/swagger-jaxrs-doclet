@@ -22,6 +22,7 @@ public class JaxRsAnnotationParser {
     public JaxRsAnnotationParser(DocletOptions options, RootDoc rootDoc) {
         this.options = options;
         this.rootDoc = rootDoc;
+        AnnotationHelper.setRootDoc(rootDoc);
     }
 
     public boolean run() {

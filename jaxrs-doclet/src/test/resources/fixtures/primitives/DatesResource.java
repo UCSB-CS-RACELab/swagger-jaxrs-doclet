@@ -13,6 +13,9 @@ public class DatesResource {
         return new Date();
     }
 
+    /**
+     * @output void
+     */
     @POST
     public Response create(Date value) {
         return Response.ok().build();

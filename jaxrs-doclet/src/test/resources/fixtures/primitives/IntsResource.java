@@ -12,6 +12,9 @@ public class IntsResource {
         return 0;
     }
 
+    /**
+     * @output void
+     */
     @POST
     public Response create(int value) {
         return Response.ok().build();

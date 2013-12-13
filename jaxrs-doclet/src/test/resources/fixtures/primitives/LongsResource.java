@@ -12,6 +12,9 @@ public class LongsResource {
         return 0;
     }
 
+    /**
+     * @output void
+     */
     @POST
     public Response create(long value) {
         return Response.ok().build();

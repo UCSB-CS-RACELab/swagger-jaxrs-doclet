@@ -12,6 +12,9 @@ public class JacksonResource {
         return new ResponseModel();
     }
 
+    /**
+     * @output void
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(PayloadModel payload) {

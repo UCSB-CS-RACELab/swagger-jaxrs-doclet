@@ -2,9 +2,7 @@ package com.hypnoticocelot.jaxrs.doclet.parser;
 
 import com.google.common.base.Predicate;
 import com.hypnoticocelot.jaxrs.doclet.DocletOptions;
-import com.sun.javadoc.AnnotationDesc;
-import com.sun.javadoc.Parameter;
-import com.sun.javadoc.Type;
+import com.sun.javadoc.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +14,8 @@ public class AnnotationHelper {
     private static final String JAX_RS_PATH_PARAM = "javax.ws.rs.PathParam";
     private static final String JAX_RS_QUERY_PARAM = "javax.ws.rs.QueryParam";
     private static final String JERSEY_MULTIPART_FORM_PARAM = "com.sun.jersey.multipart.FormDataParam";
+
+    private static RootDoc rootDoc;
     
     @SuppressWarnings("serial")
     static final List<String> PRIMITIVES = new ArrayList<String>() {{
@@ -27,6 +27,7 @@ public class AnnotationHelper {
         add("double");
         add("string");
         add("Date");
+        add("void");
     }};
 
     public static String parsePath(AnnotationDesc[] annotations) {
@@ -109,6 +110,10 @@ public class AnnotationHelper {
         return PRIMITIVES.contains(typeOf(type.qualifiedTypeName()));
     }
 
+    public static boolean isPrimitive(String type) {
+        return PRIMITIVES.contains(typeOf(type));
+    }
+
     public static class ExcludedAnnotations implements Predicate<AnnotationDesc> {
         private final DocletOptions options;
 
@@ -127,6 +132,14 @@ public class AnnotationHelper {
             String annotationClass = annotationDesc.annotationType().qualifiedTypeName();
             return annotationClass.startsWith(JAX_RS_ANNOTATION_PACKAGE);
         }
+    }
+
+    static void setRootDoc(RootDoc root) {
+        rootDoc = root;
+    }
+
+    public static ClassDoc getClassDoc(String name) {
+        return rootDoc.classNamed(name);
     }
 
 }
