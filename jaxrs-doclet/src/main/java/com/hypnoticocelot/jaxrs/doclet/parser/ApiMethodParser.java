@@ -1,7 +1,6 @@
 package com.hypnoticocelot.jaxrs.doclet.parser;
 
 import com.hypnoticocelot.jaxrs.doclet.DocletOptions;
-import com.hypnoticocelot.jaxrs.doclet.ServiceDoclet;
 import com.hypnoticocelot.jaxrs.doclet.model.*;
 import com.hypnoticocelot.jaxrs.doclet.translator.Translator;
 import com.sun.javadoc.*;
@@ -18,7 +17,6 @@ public class ApiMethodParser {
 
     private static final String ANN_PRODUCES = "javax.ws.rs.Produces";
     private static final String ANN_CONSUMES = "javax.ws.rs.Consumes";
-    private static final String ANN_FORM_PARAM = "javax.ws.rs.FormParam";
     private static final String RESPONSE_TYPE = "javax.ws.rs.core.Response";
 
     private final DocletOptions options;
@@ -184,10 +182,8 @@ public class ApiMethodParser {
 
     private String[] getConsumes(MethodDoc method) {
         for (Parameter parameter : methodDoc.parameters()) {
-            for (AnnotationDesc annotation : parameter.annotations()) {
-                if (ANN_FORM_PARAM.equals(annotation.annotationType().qualifiedTypeName())) {
-                    return new String[] { "application/x-www-form-urlencoded" };
-                }
+            if ("form".equals(AnnotationHelper.paramTypeOf(parameter))) {
+                return new String[] { "application/x-www-form-urlencoded" };
             }
         }
 
