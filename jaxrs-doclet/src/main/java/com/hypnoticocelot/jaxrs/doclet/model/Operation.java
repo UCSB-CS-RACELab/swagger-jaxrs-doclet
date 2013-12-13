@@ -16,6 +16,8 @@ public class Operation {
     private List<ApiParameter> parameters;
     private String summary; // cap at 60 characters for readability in the UI
     private String notes;
+    private String[] produces;
+    private String[] consumes;
 
     @JsonProperty("errorResponses")                    // swagger 1.1 name
     private List<ApiResponseMessage> responseMessages; // swagger 1.2 name
@@ -32,6 +34,8 @@ public class Operation {
         this.responseMessages = method.getResponseMessages().isEmpty() ? null : method.getResponseMessages();
         this.summary = emptyToNull(method.getFirstSentence());
         this.notes = emptyToNull(method.getComment());
+        this.produces = method.getProduces();
+        this.consumes = method.getConsumes();
     }
 
     public HttpMethod getHttpMethod() {
@@ -60,6 +64,14 @@ public class Operation {
 
     public String getNotes() {
         return notes;
+    }
+
+    public String[] getProduces() {
+        return produces;
+    }
+
+    public String[] getConsumes() {
+        return consumes;
     }
 
     @Override

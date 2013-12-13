@@ -5,6 +5,7 @@ import com.google.common.base.Objects;
 import java.util.List;
 
 public class Method {
+
     private HttpMethod method;
     private String methodName;
     private List<ApiParameter> apiParameters;
@@ -13,12 +14,16 @@ public class Method {
     private String comment;
     private String returnType;
     private String path;
+    private String[] produces = null;
+    private String[] consumes = null;
 
     @SuppressWarnings("unused")
     private Method() {
     }
 
-    public Method(HttpMethod method, String methodName, String path, List<ApiParameter> apiParameters, List<ApiResponseMessage> responseMessages, String firstSentence, String comment, String returnType) {
+    public Method(HttpMethod method, String methodName, String path, List<ApiParameter> apiParameters,
+                  List<ApiResponseMessage> responseMessages, String firstSentence, String comment,
+                  String returnType) {
         this.method = method;
         this.methodName = methodName;
         this.path = path;
@@ -63,6 +68,22 @@ public class Method {
 
     public void setReturnType(String returnType) {
         this.returnType = returnType;
+    }
+
+    public String[] getProduces() {
+        return produces;
+    }
+
+    public void setProduces(String[] produces) {
+        this.produces = produces;
+    }
+
+    public String[] getConsumes() {
+        return consumes;
+    }
+
+    public void setConsumes(String[] consumes) {
+        this.consumes = consumes;
     }
 
     public boolean isSubResource() {

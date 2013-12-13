@@ -15,6 +15,10 @@ import static com.hypnoticocelot.jaxrs.doclet.parser.AnnotationHelper.parsePath;
 
 public class ApiMethodParser {
 
+    private static final String ANN_PRODUCES = "javax.ws.rs.Produces";
+    private static final String ANN_CONSUMES = "javax.ws.rs.Consumes";
+    private static final String ANN_FORM_PARAM = "javax.ws.rs.FormParam";
+
     private final DocletOptions options;
     private final Translator translator;
     private final String parentPath;
@@ -99,7 +103,7 @@ public class ApiMethodParser {
         }
         String firstSentences = sentences.toString();
 
-        return new Method(
+        Method method = new Method(
                 httpMethod,
                 methodDoc.name(),
                 path,
@@ -109,6 +113,9 @@ public class ApiMethodParser {
                 methodDoc.commentText().replace(firstSentences, ""),
                 returnType
         );
+        method.setProduces(getProduces(methodDoc));
+        method.setConsumes(getConsumes(methodDoc));
+        return method;
     }
 
     public Set<Model> models() {
@@ -137,6 +144,46 @@ public class ApiMethodParser {
             }
         }
         return "";
+    }
+
+    private String[] getProduces(MethodDoc method) {
+        AnnotationDesc[] annotations = method.annotations();
+        for (AnnotationDesc ann : annotations) {
+            String type = ann.annotationType().qualifiedName();
+            if (ANN_PRODUCES.equals(type)) {
+                String[] produces = new String[ann.elementValues().length];
+                for (int i = 0; i < produces.length; i++) {
+                    produces[i] = ann.elementValues()[i].value().toString();
+                    produces[i] = produces[i].replaceAll("\"", "");
+                }
+                return produces;
+            }
+        }
+        return null;
+    }
+
+    private String[] getConsumes(MethodDoc method) {
+        for (Parameter parameter : methodDoc.parameters()) {
+            for (AnnotationDesc annotation : parameter.annotations()) {
+                if (ANN_FORM_PARAM.equals(annotation.annotationType().qualifiedTypeName())) {
+                    return new String[] { "application/x-www-form-urlencoded" };
+                }
+            }
+        }
+
+        AnnotationDesc[] annotations = method.annotations();
+        for (AnnotationDesc ann : annotations) {
+            String type = ann.annotationType().qualifiedName();
+            if (ANN_CONSUMES.equals(type)) {
+                String[] produces = new String[ann.elementValues().length];
+                for (int i = 0; i < produces.length; i++) {
+                    produces[i] = ann.elementValues()[i].value().toString();
+                    produces[i] = produces[i].replaceAll("\"", "");
+                }
+                return produces;
+            }
+        }
+        return null;
     }
 
 }

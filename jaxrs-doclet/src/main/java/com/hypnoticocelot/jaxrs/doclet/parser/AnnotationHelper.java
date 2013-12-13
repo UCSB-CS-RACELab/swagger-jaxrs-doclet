@@ -116,7 +116,6 @@ public class AnnotationHelper {
             this.options = options;
         }
 
-        @Override
         public boolean apply(AnnotationDesc annotationDesc) {
             String annotationClass = annotationDesc.annotationType().qualifiedTypeName();
             return options.getExcludeAnnotationClasses().contains(annotationClass);
@@ -124,7 +123,6 @@ public class AnnotationHelper {
     }
 
     public static class JaxRsAnnotations implements Predicate<AnnotationDesc> {
-        @Override
         public boolean apply(AnnotationDesc annotationDesc) {
             String annotationClass = annotationDesc.annotationType().qualifiedTypeName();
             return annotationClass.startsWith(JAX_RS_ANNOTATION_PACKAGE);
