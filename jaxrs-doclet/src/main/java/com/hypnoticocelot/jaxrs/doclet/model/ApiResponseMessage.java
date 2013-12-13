@@ -7,7 +7,6 @@ public class ApiResponseMessage {
 
     private int code;
     
-    @JsonProperty("reason") // swagger 1.1 name
     private String message; // swagger 1.2 name
     
     @SuppressWarnings("unused")

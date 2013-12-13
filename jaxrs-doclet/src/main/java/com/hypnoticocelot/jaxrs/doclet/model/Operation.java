@@ -19,7 +19,6 @@ public class Operation {
     private String[] produces;
     private String[] consumes;
 
-    @JsonProperty("errorResponses")                    // swagger 1.1 name
     private List<ApiResponseMessage> responseMessages; // swagger 1.2 name
 
     @SuppressWarnings("unused")

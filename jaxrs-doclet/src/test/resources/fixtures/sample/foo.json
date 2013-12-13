@@ -19,10 +19,10 @@
                             "dataType": "string"
                         }
                     ],
-                    "errorResponses": [
+                    "responseMessages": [
                         {
                             "code": 404,
-                            "reason": "not found"
+                            "message": "not found"
                         }
                     ]
                 },
