@@ -22,30 +22,24 @@ public class FirstNotNullTranslator implements Translator {
         return this;
     }
 
-    @Override
     public OptionalName typeName(final Type type) {
         return firstNotNullOf(new Function<Translator, OptionalName>() {
-            @Override
             public OptionalName apply(Translator translator) {
                 return translator.typeName(type);
             }
         });
     }
 
-    @Override
     public OptionalName fieldName(final FieldDoc field) {
         return firstNotNullOf(new Function<Translator, OptionalName>() {
-            @Override
             public OptionalName apply(Translator translator) {
                 return translator.fieldName(field);
             }
         });
     }
 
-    @Override
     public OptionalName methodName(final MethodDoc method) {
         return firstNotNullOf(new Function<Translator, OptionalName>() {
-            @Override
             public OptionalName apply(Translator translator) {
                 return translator.methodName(method);
             }

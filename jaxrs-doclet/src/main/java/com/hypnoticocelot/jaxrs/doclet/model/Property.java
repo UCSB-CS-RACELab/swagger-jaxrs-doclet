@@ -38,7 +38,6 @@ public class Property {
         this.type = "string";
         this.description = description;
         this.allowableValues = new AllowableValues(transform(asList(enumConstants), new Function<FieldDoc, String>() {
-            @Override
             public String apply(FieldDoc input) {
                 return input.name();
             }

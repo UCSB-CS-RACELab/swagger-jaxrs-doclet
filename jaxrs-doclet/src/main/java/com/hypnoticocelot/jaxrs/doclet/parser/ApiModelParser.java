@@ -85,8 +85,14 @@ public class ApiModelParser {
             String containerTypeOf = containerOf == null ? null : translator.typeName(containerOf).value();
 
             String propertyName = translator.typeName(type).value();
+            if ("[]".equals(type.dimension())) {
+                // Support for handling array properties
+                propertyName = "array";
+                containerTypeOf = translator.typeName(type).value();
+            }
+
             Property property;
-            if (typeClassDoc != null && typeClassDoc.isEnum()) {
+            if (typeClassDoc != null && typeClassDoc.isEnum() && "".equals(type.dimension())) {
                 property = new Property(typeClassDoc.enumConstants(), null);
             } else {
                 property = new Property(propertyName, null, containerTypeOf);
@@ -120,7 +126,6 @@ public class ApiModelParser {
 
     private boolean alreadyStoredType(final Type type) {
         return filter(models, new Predicate<Model>() {
-            @Override
             public boolean apply(Model model) {
                 return model.getId().equals(translator.typeName(type).value());
             }
