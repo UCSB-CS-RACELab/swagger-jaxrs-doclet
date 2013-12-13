@@ -2,12 +2,15 @@ package com.hypnoticocelot.jaxrs.doclet.model;
 
 import com.google.common.base.Objects;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Model {
 
     private String id;
     private Map<String, Property> properties;
+    private Set<String> required = new HashSet<String>();
 
     public Model() {
     }
@@ -15,14 +18,23 @@ public class Model {
     public Model(String id, Map<String, Property> properties) {
         this.id = id;
         this.properties = properties;
+        this.required.addAll(properties.keySet());
     }
 
     public String getId() {
         return id;
     }
 
+    public void markAsOptional(String property) {
+        this.required.remove(property);
+    }
+
     public Map<String, Property> getProperties() {
         return properties;
+    }
+
+    public Set<String> getRequired() {
+        return required;
     }
 
     @Override

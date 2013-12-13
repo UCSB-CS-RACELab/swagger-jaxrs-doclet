@@ -44,9 +44,42 @@ public class ApiModelParser {
         Map<String, Type> types = findReferencedTypes(classDoc);
         Map<String, Property> elements = findReferencedElements(types);
         if (!elements.isEmpty()) {
-            models.add(new Model(translator.typeName(type).value(), elements));
+            List<String> optional = findOptionalFields(classDoc);
+            Model model = new Model(translator.typeName(type).value(), elements);
+            for (String op : optional) {
+                model.markAsOptional(op);
+            }
+            models.add(model);
             parseNestedModels(types.values());
         }
+    }
+
+    private List<String> findOptionalFields(ClassDoc classDoc) {
+        List<String> optional = new ArrayList<String>();
+
+        FieldDoc[] fieldDocs = classDoc.fields();
+        if (fieldDocs != null) {
+            for (FieldDoc field : fieldDocs) {
+                Tag[] tags = field.tags("optional");
+                if (tags != null && tags.length > 0) {
+                    optional.add(translator.fieldName(field).value());
+                }
+            }
+        }
+
+        MethodDoc[] methodDocs = classDoc.methods();
+        if (methodDocs != null) {
+            for (MethodDoc method : methodDocs) {
+                if (!method.name().startsWith("get")) {
+                    continue;
+                }
+                Tag[] tags = method.tags("optional");
+                if (tags != null && tags.length > 0) {
+                    optional.add(translator.methodName(method).value());
+                }
+            }
+        }
+        return optional;
     }
 
     private Map<String, Type> findReferencedTypes(ClassDoc classDoc) {
