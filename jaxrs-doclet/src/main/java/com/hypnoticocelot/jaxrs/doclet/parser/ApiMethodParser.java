@@ -82,8 +82,30 @@ public class ApiMethodParser {
             for (Tag tagValue : methodDoc.tags(tagName)) {
                 Matcher matcher = pattern.matcher(tagValue.text());
                 if (matcher.find()) {
-                    responseMessages.add(new ApiResponseMessage(Integer.valueOf(matcher.group(1)),
-                            matcher.group(2)));
+                    int code = Integer.valueOf(matcher.group(1));
+                    String message = matcher.group(2);
+                    String responseModel = null;
+                    if (message != null) {
+                        message = message.trim();
+                        // if the message starts with {dataType} pattern...
+                        if (message.indexOf('{') == 0 &&  message.indexOf('}') > 1) {
+                            int end = message.indexOf('}');
+                            String typeName = message.substring(1, end);
+                            if (AnnotationHelper.isPrimitive(typeName)) {
+                                responseModel = typeName;
+                            } else {
+                                Type responseType = AnnotationHelper.getClassDoc(message.substring(1, end));
+                                responseModel = translator.typeName(responseType).value();
+                                if (options.isParseModels()) {
+                                    models.addAll(new ApiModelParser(options, translator, responseType).parse());
+                                }
+                            }
+                            message = message.substring(end + 1);
+                        }
+                    }
+                    ApiResponseMessage responseMessage = new ApiResponseMessage(code, message);
+                    responseMessage.setResponseModel(responseModel);
+                    responseMessages.add(responseMessage);
                 }
             }
         }
@@ -94,7 +116,7 @@ public class ApiMethodParser {
         if (RESPONSE_TYPE.equals(type.qualifiedTypeName())) {
             Tag[] outputTags = methodDoc.tags("output");
             if (outputTags == null || outputTags.length == 0) {
-                throw new RuntimeException("@output tag should be added to methods that return " +
+                throw new RuntimeException("@output tag is required for methods that return " +
                         "JAX-RS Response objects (" + methodDoc.containingClass().qualifiedTypeName() +
                         "." + methodDoc.name() + ")");
             }

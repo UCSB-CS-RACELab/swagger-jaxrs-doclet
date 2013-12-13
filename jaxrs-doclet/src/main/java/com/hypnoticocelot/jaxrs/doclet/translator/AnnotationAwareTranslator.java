@@ -46,7 +46,6 @@ public class AnnotationAwareTranslator implements Translator {
         return this;
     }
 
-    @Override
     public OptionalName typeName(Type type) {
         if (namedTypes.containsKey(type)) {
             return namedTypes.get(type);
@@ -68,12 +67,10 @@ public class AnnotationAwareTranslator implements Translator {
         return name;
     }
 
-    @Override
     public OptionalName fieldName(FieldDoc field) {
         return nameFor(element, elementProperty, field);
     }
 
-    @Override
     public OptionalName methodName(MethodDoc method) {
         return nameFor(element, elementProperty, method);
     }

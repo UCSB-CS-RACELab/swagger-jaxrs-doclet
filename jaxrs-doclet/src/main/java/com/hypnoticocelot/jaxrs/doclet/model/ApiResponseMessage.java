@@ -1,6 +1,5 @@
 package com.hypnoticocelot.jaxrs.doclet.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 
 public class ApiResponseMessage {
@@ -8,6 +7,8 @@ public class ApiResponseMessage {
     private int code;
     
     private String message; // swagger 1.2 name
+
+    private String responseModel;
     
     @SuppressWarnings("unused")
     private ApiResponseMessage() {
@@ -24,6 +25,14 @@ public class ApiResponseMessage {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getResponseModel() {
+        return responseModel;
+    }
+
+    public void setResponseModel(String responseModel) {
+        this.responseModel = responseModel;
     }
 
     @Override
