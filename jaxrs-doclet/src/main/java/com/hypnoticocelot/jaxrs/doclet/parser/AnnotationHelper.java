@@ -70,8 +70,9 @@ public class AnnotationHelper {
         }
         if (type.equalsIgnoreCase("int")) {
             type = "integer";
-        } else if (type.equalsIgnoreCase("arraylist") || type.equalsIgnoreCase("linkedlist")) {
-            type = "List";
+        } else if (type.equalsIgnoreCase("arraylist") || type.equalsIgnoreCase("linkedlist") ||
+                type.equalsIgnoreCase("list") || type.equalsIgnoreCase("set")) {
+            type = "array";
         }
         return type;
     }
