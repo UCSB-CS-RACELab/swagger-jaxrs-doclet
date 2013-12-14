@@ -21,7 +21,7 @@ public class ApiDeclaration {
 
     public ApiDeclaration(String apiVersion, String basePath, String resourcePath, Collection<Api> apis, Map<String, Model> models) {
         this.apiVersion = apiVersion;
-        this.swaggerVersion = "1.1";
+        this.swaggerVersion = "1.2";
         this.basePath = basePath;
         this.resourcePath = resourcePath;
         this.apis = apis.isEmpty() ? null : apis;
