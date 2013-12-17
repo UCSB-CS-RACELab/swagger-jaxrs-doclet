@@ -6,8 +6,10 @@ import com.google.common.base.Objects;
 import java.util.Collection;
 import java.util.Map;
 
-@JsonPropertyOrder({"apiVersion", "swaggerVersion", "basePath", "resourcePath", "apis", "models"})
+@JsonPropertyOrder({"apiName", "apiVersion", "swaggerVersion", "basePath", "resourcePath", "apis", "models"})
 public class ApiDeclaration {
+
+    private String apiName;
     private String apiVersion;
     private String swaggerVersion;
     private String basePath;
@@ -19,13 +21,18 @@ public class ApiDeclaration {
     private ApiDeclaration() {
     }
 
-    public ApiDeclaration(String apiVersion, String basePath, String resourcePath, Collection<Api> apis, Map<String, Model> models) {
+    public ApiDeclaration(String apiName, String apiVersion, String basePath, String resourcePath, Collection<Api> apis, Map<String, Model> models) {
+        this.apiName = apiName;
         this.apiVersion = apiVersion;
         this.swaggerVersion = "1.2";
         this.basePath = basePath;
         this.resourcePath = resourcePath;
         this.apis = apis.isEmpty() ? null : apis;
         this.models = models.isEmpty() ? null : models;
+    }
+
+    public String getApiName() {
+        return apiName;
     }
 
     public String getApiVersion() {
@@ -58,6 +65,7 @@ public class ApiDeclaration {
         if (o == null || getClass() != o.getClass()) return false;
         ApiDeclaration that = (ApiDeclaration) o;
         return Objects.equal(apiVersion, that.apiVersion)
+                && Objects.equal(apiName, that.apiName)
                 && Objects.equal(swaggerVersion, that.swaggerVersion)
                 && Objects.equal(basePath, that.basePath)
                 && Objects.equal(resourcePath, that.resourcePath)
@@ -73,6 +81,7 @@ public class ApiDeclaration {
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
+                .add("apiName", apiName)
                 .add("apiVersion", apiVersion)
                 .add("swaggerVersion", swaggerVersion)
                 .add("basePath", basePath)

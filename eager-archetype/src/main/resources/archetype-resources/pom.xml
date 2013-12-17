@@ -87,7 +87,7 @@
                             </docletArtifact>
                             <reportOutputDirectory>${project.build.directory}</reportOutputDirectory>
                             <useStandardDocletOptions>false</useStandardDocletOptions>
-                            <additionalparam>-apiVersion ${apiVersion} -apiBasePath /resources</additionalparam>
+                            <additionalparam>-enableApiNames -apiVersion ${apiVersion} -apiBasePath /resources</additionalparam>
                         </configuration>
                         <goals>
                             <goal>javadoc</goal>

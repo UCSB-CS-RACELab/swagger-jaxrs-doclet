@@ -9,7 +9,7 @@ import java.util.*;
 import java.net.URI;
 
 @Path("/data")
-public class SampleResource {
+public class SampleAPI {
 
     private static final List<DataObject> dataStore = new ArrayList<DataObject>();
 

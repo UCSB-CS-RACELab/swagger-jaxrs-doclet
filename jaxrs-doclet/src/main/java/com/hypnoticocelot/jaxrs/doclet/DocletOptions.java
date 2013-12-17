@@ -26,6 +26,7 @@ public class DocletOptions {
     private boolean parseModels = true;
     private Recorder recorder = new ObjectMapperRecorder();
     private Translator translator;
+    private boolean enableApiNames = false;
 
     public DocletOptions() {
         excludeAnnotationClasses = new ArrayList<String>();
@@ -73,6 +74,8 @@ public class DocletOptions {
                 parsedOptions.errorTags.addAll(asList(copyOfRange(option, 1, option.length)));;
             } else if (option[0].equals("-typesToTreatAsOpaque")) {
                 parsedOptions.typesToTreatAsOpaque.addAll(asList(copyOfRange(option, 1, option.length)));;
+            } else if (option[0].equals("-enableApiNames")) {
+                parsedOptions.enableApiNames = true;
             }
         }
         return parsedOptions;
@@ -112,6 +115,10 @@ public class DocletOptions {
 
     public boolean isParseModels() {
         return parseModels;
+    }
+
+    public boolean isEnableApiNames() {
+        return enableApiNames;
     }
 
     public Recorder getRecorder() {
