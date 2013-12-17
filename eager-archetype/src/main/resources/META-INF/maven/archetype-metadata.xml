@@ -1,0 +1,21 @@
+<archetype-descriptor>
+    <requiredProperties>
+        <requiredProperty key="apiVersion"/>
+    </requiredProperties>
+    <fileSets>
+        <fileSet filtered="true" packaged="true" encoding="UTF-8">
+            <directory>src/main/java</directory>
+            <includes>
+                <include>**/*.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>src/main/webapp/WEB-INF</directory>
+            <includes>
+                <include>web.xml</include>
+                <include>appengine-web.xml</include>
+                <include>logging.properties</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</archetype-descriptor>

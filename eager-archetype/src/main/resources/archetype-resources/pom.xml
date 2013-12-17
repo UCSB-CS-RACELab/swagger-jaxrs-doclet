@@ -87,7 +87,7 @@
                             </docletArtifact>
                             <reportOutputDirectory>${project.build.directory}</reportOutputDirectory>
                             <useStandardDocletOptions>false</useStandardDocletOptions>
-                            <additionalparam>-apiBasePath /resources</additionalparam>
+                            <additionalparam>-apiVersion ${apiVersion} -apiBasePath /resources</additionalparam>
                         </configuration>
                         <goals>
                             <goal>javadoc</goal>
@@ -104,7 +104,7 @@
                     <webResources>
                         <!-- in order to interpolate version from pom into appengine-web.xml -->
                         <resource>
-                            <directory>\${basedir}/src/main/webapp/WEB-INF</directory>
+                            <directory>${basedir}/src/main/webapp/WEB-INF</directory>
                             <filtering>true</filtering>
                             <targetPath>WEB-INF</targetPath>
                         </resource>
