@@ -125,6 +125,30 @@
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>${appengine.target.version}</version>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>package-for-appscale</id>
+                        <phase>install</phase>
+                        <configuration>
+                            <target>
+                                <property name="deployment.name" value="${project.artifactId}-${project.version}"/>
+                                <delete dir="target/${deployment.name}"/>
+                                <mkdir dir="target/${deployment.name}"/>
+                                <mkdir dir="target/${deployment.name}/war"/>
+                                <unzip src="target/${deployment.name}.war" dest="target/${deployment.name}/war"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
