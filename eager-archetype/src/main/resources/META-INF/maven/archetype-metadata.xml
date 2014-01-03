@@ -15,6 +15,7 @@
                 <include>web.xml</include>
                 <include>appengine-web.xml</include>
                 <include>logging.properties</include>
+                <include>dependencies.yaml</include>
             </includes>
         </fileSet>
     </fileSets>
